@@ -1,0 +1,8 @@
+pandas
+fastapi
+uvicorn
+python-jose[cryptography]
+pydantic
+langchain
+langchain-experimental
+tabulate
