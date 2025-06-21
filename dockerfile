@@ -15,11 +15,9 @@ RUN cmake --version
 
 RUN clang --version
 
-COPY requirements.txt /requirements.txt
+COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
-
-COPY BitNet /BitNet
 
 WORKDIR /BitNet
 
@@ -37,10 +35,4 @@ RUN mv /BitNet/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf /app/models/ggml-m
 
 RUN rm -rf /BitNet
 
-COPY /run_llm.py /app/
-
 WORKDIR /app
-
-RUN ["python", "run_llm.py"]
-
-CMD ["/bin/sh", "-c", "while true; do sleep 1; done"]
