@@ -15,25 +15,27 @@ RUN cmake --version
 
 RUN clang --version
 
-COPY . .
+RUN mkdir /app/
+
+COPY . /app
+
+WORKDIR /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /BitNet
+WORKDIR /app/BitNet
 
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN python setup_env.py -md models/BitNet-b1.58-2B-4T -q i2_s
 
-RUN mkdir /app/
-
 RUN mkdir /app/models
 
-RUN mv /BitNet/build/bin /app/libs
+RUN mv /app/BitNet/build/bin /app/libs
 
-RUN mv /BitNet/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf /app/models/ggml-model-i2_s.gguf
+RUN mv /app/BitNet/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf /app/models/ggml-model-i2_s.gguf
 
-RUN rm -rf /BitNet
+RUN rm -rf /app/BitNet
 
 WORKDIR /app
 
