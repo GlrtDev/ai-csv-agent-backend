@@ -36,3 +36,5 @@ RUN mv /BitNet/models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf /app/models/ggml-m
 RUN rm -rf /BitNet
 
 WORKDIR /app
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
